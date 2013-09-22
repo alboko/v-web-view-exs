@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<title>CAMI Assembly - Vizup&trade; 3D model optimization for online visualization with multi-resolution LOD streaming</title>
+	<meta name="description" content="Vizup 3D mesh optimization for on-line visualization with multi-resolution LOD streaming. Vizup 3D optimization reduces model-processing times, lowers storage/bandwidth requirements and improves on-line visualization experience." />
+	<meta name="keywords" content="polygon, mesh, model, decimation, reduction, optimization, reducing, simplification, topology, cad, 3d, scan, printing, lidar, memento, gis, aec, simplygon, animation" />
+
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
+
+	<link rel="shortcut icon" href="pics/favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="../css/reset.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="../css/grid.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="../css/style-web.css" type="text/css" media="all" />
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-31133694-1']);
+		_gaq.push(['_trackPageview']);
+		(function () {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+</head>
+
+<body>
+
+	<div class="top1">
+		<header class="thin">
+		   <div class="main">
+			   <h1><a href="../index.html">vizup</a></h1>
+				<div class="indent"><div class="rowElem1">
+					<div class="txt6">The Ultimate 3D Optimization Technology&trade;</div>
+				</div></div>
+			</div>
+		</header>
+	</div>
+
+	<div class="bg_cont1">
+		<div class="bg_cont">
+			<section id="content">
+				<div class="main">
+					<div class="inside">
+
+						<h4>Vizup&trade; optimization for on-line visualization - dynamic multi-resolution LOD streaming - 2.2 Million triangles</h4>
+						<div id="webgl_container" style="width:960px; height:500px; background-color:#eeeeee"></div>
+						<p>
+							Use the mouse to pan/zoom/rotate, 'r' key to reset the view and 's' key to change the shading mode.<br />
+							Left or right arrow keys to switch between various LOD, 'i' key to display model info<br />
+							(c) The original Inukshuk 3D-scan is courtesy of <a href="http://www.3d3solutions.com/" target="_blank">3D3 Solutions</a>.
+						</p>
+
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+
+    <script src="js/lib/log4javascript.js"></script>
+
+    <!-- for production
+    <script src="js/lib/three.min.js"></script>
+	<script src="js/vizup-web.js"></script>
+    -->
+
+    <script src="js/lib/three.js"></script>
+	<script src="js/lib/TrackballControls.js"></script>
+    <script src="js/lib/ctm/CTMLoader.js"></script>
+
+	<script src="js/vizup-webw.js"></script>
+
+    <script src="js/VizupLODChain.js"></script>
+    <script src="js/VizupHUD.js"></script>
+	<script src="js/VizupWebView.js"></script>
+
+    <script>
+
+		log4javascript.setEnabled(false);
+
+        var vizupModel = {
+            name: 'CAMI Assembly',
+            url: 'data/cami/part2_3_07',
+            lods: [ 'v90', 'v75', 'v50' ],
+            showIndex: -2,  // second from from the end
+            rotation : [ -Math.PI/3, 0, 0 ]  // flip vertically for better view
+        };
+
+        if (vizupWebView_init("webgl_container")) {
+            vizupWebView_loadModel(vizupModel);
+            vizupWebView_animate();
+        }
+
+    </script>
+
+	<footer>
+		<div class="main">
+		   <div class="inside">
+				<div class="container">
+					<div class="fleft">&copy; 2013 <span>Vizup</span></div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+</body>
+</html>

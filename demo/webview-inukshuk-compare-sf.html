@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<title>Inukshuk 3D scan | Vizup&trade; 3D mesh optimization for online visualization with multi-resolution LOD loading | compare with SketchFab</title>
+	<meta name="description" content="Vizup 3D mesh optimization for on-line visualization with multi-resolution LOD streaming. Vizup 3D optimization reduces model-processing times, lowers storage/bandwidth requirements and improves on-line visualization experience." />
+	<meta name="keywords" content="polygon, mesh, model, decimation, reduction, optimization, reducing, simplification, topology, cad, 3d, scan, printing, lidar, memento, gis, aec, simplygon, animation" />
+
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
+
+	<link rel="shortcut icon" href="pics/favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="../css/reset.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="../css/unsemantic-grid-responsive-tablet-no-ie7.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="../css/style-web.css" type="text/css" media="all" />
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-31133694-1']);
+		_gaq.push(['_trackPageview']);
+		(function () {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+</head>
+
+<body>
+
+	<div class="top1">
+		<header class="thin">
+		   <div class="main">
+			   <h1><a href="../index.html">vizup</a></h1>
+				<div class="indent"><div class="rowElem1">
+					<div class="txt6">The Ultimate 3D Optimization Technology&trade;</div>
+				</div></div>
+			</div>
+		</header>
+	</div>
+
+	<div class="bg_cont1">
+		<div class="bg_cont">
+			<section id="content"><div class="inside">
+
+
+				<div class="grid-container">
+					<h2>
+						Technology solution: 3D model optimization for on-line visualization with dynamic multi-resolution LOD loading -
+						Inukshuk 3D scan, 1.8M triangles.
+					</h2>
+					<p>
+						Vizup&trade; 3D optimization with instant LOD-chain generation allows to decrease model loading times up to several times.
+						Compare the loading times for the same model in Vizup WebView&trade; (on the left) with SketchFab embedded viewer (on the right):
+					</p>
+
+					<div class="grid-50">
+
+						<h4>Vizup Web&trade; online viewer with dynamic muti-resolution LOD loading</h4>
+						<div id="vw_container" style="width:580px; height:500px; background-color:#eeeeee"></div>
+						<p>Use the mouse to pan/zoom/rotate, 'r' key to reset the view and 's' key to change the shading mode</p>
+					</div>
+					<div class="grid-50">
+
+						<h4>SketchFab on-line visualization</h4>
+						<iframe frameborder="1" height="500" width="580" src="http://skfb.ly/mk4j2fb?autostart=1&transparent=0&autospin=0&controls=0&watermark=1&desc_button=0"></iframe>
+						<p>Use the mouse to pan/zoom/rotate the model</p>
+					</div>
+					<div class="clear"></div>
+
+					<p>
+						(c) The original Inukshuk 3D-scan is courtesy of <a href="http://www.3d3solutions.com/" target="_blank">3D3 Solutions</a>.
+					</p>
+
+				</div>
+
+			</div></section>
+		</div>
+	</div>
+
+    <script src="js/lib/log4javascript.js"></script>
+    <script src="js/lib/three.min.js"></script>
+	<script src=js/vizup-web.js></script>
+
+    <script>
+
+		log4javascript.setEnabled(false);
+
+        var vizupModel = {
+            name: 'Inukshuk',
+            url: 'data/inukshuk/inukshuk',
+            lods: ['r99.9', 'r99', 'r75', ''],
+            showIndex: -2,  // second from from the end
+            rotation : [ Math.PI, 0, 0 ]  // flip vertically for better view
+        };
+
+        if (vizupWebView_init("vw_container")) {
+            vizupWebView_loadModel(vizupModel);
+            vizupWebView_animate();
+        }
+
+    </script>
+
+
+<footer>
+   	<div class="main">
+       <div class="inside">
+            <div class="container">
+                <div class="fleft">&copy; 2013 <span>Vizup</span></div>
+            </div>
+    	</div>
+    </div>
+</footer>
+
+
+
+
+</body>
+</html>
