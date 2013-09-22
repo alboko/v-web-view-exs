@@ -13,13 +13,13 @@ var vizup = vizup || {};
 // constructor
 vizup.LODChain = function(name, location) {
 
-	THREE.Object3D.call(this);
+    THREE.Object3D.call(this);
 
-	this.location = location || '';
+    this.location = location || '';
     this.modelName = name && name.length > 0 ? name : 'Vizup LOD sample';
 
     this.lods = [];
-	this.currentLODIndex = -1;
+    this.currentLODIndex = -1;
     this.stillLoading = true;
 
     // each LOD has references for BufferGeometry and ClassicGeometry meshes
@@ -386,20 +386,21 @@ vizup.LODChain.normalizeMesh = function(mesh, scale, center) {
 
 vizup.LODChain.MATERIAL_SHADING = new THREE.MeshLambertMaterial( {
 	color: 0xbbbbbb,
+	side: THREE.DoubleSide,         // THREE.FrontSide
 	opacity: 1.,
 	wireframe: false,
-	shading: THREE.FlatShading
+	shading: THREE.SmoothShading    // THREE.FlatShading
 });
 
 vizup.LODChain.MATERIAL_NORMALS = new THREE.MeshNormalMaterial( {
-    shading: THREE.FlatShading
+        shading: THREE.FlatShading
 });
 
 vizup.LODChain.MATERIAL_COLORS = new THREE.MeshLambertMaterial( {
 	color: 0xcccccc,
-    side: THREE.DoubleSide,
-    vertexColors: THREE.VertexColors,
-    shading: THREE.FlatShading
+        side: THREE.DoubleSide,
+        vertexColors: THREE.VertexColors,
+        shading: THREE.FlatShading
 });
 
 vizup.LODChain.ShadingMaterials = [
