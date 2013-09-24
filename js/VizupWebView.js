@@ -73,15 +73,37 @@
         vizupWebModel = new vizup.LODChain(vzmodel.name, vzmodel.url);
         vizupWebModel.loadChain(vzmodel.lods, vzmodel.showIndex);
 
-		// rotate top model if neccessary - demo hack
-		if (vzmodel.rotation) {
-			vizupWebModel.rotation.set(vzmodel.rotation[0], vzmodel.rotation[1], vzmodel.rotation[2]);
-			log.debug('vizupWebView_loadModel - applied demo ratation: [ ' +
-					  vzmodel.rotation[0] + ', ' + vzmodel.rotation[1] + ', ' + vzmodel.rotation[2] + ' ]');
-		}
+        // rotate top model if neccessary - demo hack
+        if (vzmodel.rotation) {
+                vizupWebModel.rotation.set(vzmodel.rotation[0], vzmodel.rotation[1], vzmodel.rotation[2]);
+                log.debug('vizupWebView_loadModel - applied demo ratation: [ ' +
+                        vzmodel.rotation[0] + ', ' + vzmodel.rotation[1] + ', ' + vzmodel.rotation[2] + ' ]');
+        }
 
         vizupWebScene.add(vizupWebModel);
+    }
 
+    // temporary (REMOVE): load obj model
+    function vizupWebView_loadOBJ(modelURL, mtlURL) {
+
+        var loader = new THREE.OBJMTLLoader();
+	loader.load(modelURL, mtlURL, function (object) {
+
+	        // find mesh/geometry in the object and normalize it
+                object.traverse( function(mesh) {
+                        if (mesh instanceof THREE.Mesh) {
+
+                                var geometry = mesh.geometry;
+
+                                var scale = 3000. // vizup.LODChain.normalizationScale(geometry);
+                                var center = new THREE.Vector3(); // vizup.LODChain.normalizationCenter(geometry);
+                                console.log("normalizing OBJ mesh geometry, scale: " + scale);
+                                vizup.LODChain.normalizeMesh(mesh, scale, center);
+                        }
+                });
+
+		vizupWebScene.add(object);
+	} );
     }
 
     // process application keyboard events
@@ -91,15 +113,15 @@
         switch (event.keyCode) {
 
             case 190:   // "> (.)" - more detailed LOD
-			case 39:
-				vizupWebModel.activateNextLOD(+1);
+	    case 39:
+		izupWebModel.activateNextLOD(+1);
                 vizupHUD.updateLODinfo(vizupWebModel.getHUDInfo());
-				break;
+		break;
             case 188:   // "< (,)" - less detailed LOD
-			case 37:
-				vizupWebModel.activateNextLOD(-1);
+	    case 37:
+		vizupWebModel.activateNextLOD(-1);
                 vizupHUD.updateLODinfo(vizupWebModel.getHUDInfo());
-				break;
+		break;
             case 87:    // "w" - not supported yet;
                 // vizupWebModel.toggleWireframeMode();
                 break;

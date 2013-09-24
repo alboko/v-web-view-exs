@@ -128,13 +128,13 @@ vizup.LODChain.prototype.createLOD = function(geometry)
 
 	// create shading mesh with color when available
     var material = (geometry.attributes && geometry.attributes["color"]) ? vizup.LODChain.MATERIAL_COLORS : vizup.LODChain.MATERIAL_SHADING;
-	var bufferMesh = new THREE.Mesh(geometry, material);
+    var bufferMesh = new THREE.Mesh(geometry, material);
 
-	bufferMesh.name = vizup.LODChain.NAMETAG_BUFFER_MESH;
-	bufferMesh.visible = false;
-	log.debug('vizup.LODChain: created shading mesh: ' + bufferMesh.id + ' for ' + geometry.name);
+    bufferMesh.name = vizup.LODChain.NAMETAG_BUFFER_MESH;
+    bufferMesh.visible = false;
+    log.debug('vizup.LODChain: created shading mesh: ' + bufferMesh.id + ' for ' + geometry.name);
 
-	// normalize both with the same scale and center
+    // normalize both with the same scale and center
     if (!this.npScale) {
         this.npScale = vizup.LODChain.normalizationScale(geometry);
         log.debug('vizup.LODChain: computed scale: ' + this.npScale);
@@ -144,15 +144,11 @@ vizup.LODChain.prototype.createLOD = function(geometry)
         log.debug('vizup.LODChain: computed center: ' + this.npCenter);
     }
 
-	log.debug('VizupLOD: normalized meshes with scale: ' + this.npScale +
+    log.debug('VizupLOD: normalized meshes with scale: ' + this.npScale +
               ' center[' + this.npCenter.x + ',' + this.npCenter.y + ',' + this.npCenter.z);
-	vizup.LODChain.normalizeMesh(LOD, this.npScale, this.npCenter);
+    vizup.LODChain.normalizeMesh(LOD, this.npScale, this.npCenter);
 
-    // @TEMP : correction
-    // bufferMesh.rotation.x += Math.PI;
-
-
-	// store in the top object
+    // store in the top object
     LOD.add(bufferMesh);
     LOD.bufferMesh = bufferMesh;
 
@@ -187,10 +183,10 @@ vizup.LODChain.prototype.activateLOD = function(index) {
         vizup.LODChain.setLODVisibility(currentLOD, false);
     }
 
-	// turn on the next one and restore wireframe
-	this.currentLODIndex = index;
-	var currentLOD = this.lods[this.currentLODIndex];
-	vizup.LODChain.setLODVisibility(currentLOD, true);
+    // turn on the next one and restore wireframe
+    this.currentLODIndex = index;
+    var currentLOD = this.lods[this.currentLODIndex];
+    vizup.LODChain.setLODVisibility(currentLOD, true);
     vizup.LODChain.setLODShadingMode(currentLOD, this.shadingMode);
 
     // set the vuzualization modes for complementaty classic geometry
@@ -201,17 +197,17 @@ vizup.LODChain.prototype.activateLOD = function(index) {
     }
     */
 
-	return true;
+    return true;
 }
 
 vizup.LODChain.prototype.activateNextLOD = function(direction) {
 
-	if (direction > 0 && this.currentLODIndex < this.lods.length-1)
-		direction = 1;
-	else if (direction < 0 && this.currentLODIndex > 0)
-		direction = -1;
-	else
-		return false;
+    if (direction > 0 && this.currentLODIndex < this.lods.length-1)
+	direction = 1;
+    else if (direction < 0 && this.currentLODIndex > 0)
+	direction = -1;
+    else
+	return false;
 
     return this.activateLOD(this.currentLODIndex+direction);
 }
@@ -220,22 +216,22 @@ vizup.LODChain.prototype.setShadingMode = function(mode) {
 
     this.shadingMode = mode % vizup.LODChain.ShadingMaterials.length;
 
-	if (this.currentLODIndex >= 0) {
-		vizup.LODChain.setLODShadingMode(this.lods[this.currentLODIndex], this.shadingMode);
-	}
+    if (this.currentLODIndex >= 0) {
+	vizup.LODChain.setLODShadingMode(this.lods[this.currentLODIndex], this.shadingMode);
+    }
 };
 
 vizup.LODChain.prototype.toggleShadingMode = function() {
-	this.setShadingMode(this.shadingMode+1);
+    this.setShadingMode(this.shadingMode+1);
 };
 
 vizup.LODChain.prototype.toggleWireframeMode = function() {
     log.warn('LODChain.prototype.toggleWireframeMode - not implemented');
-/* @TODO: rewrite
+        /* @TODO: rewrite
 	if (this.currentLODIndex >= 0) {
 		vizup.LODChain.setWireframeMode(this.lods[this.currentLODIndex]);
 	}
-*/
+        */
 };
 
 // get HUD info - do not support standard geometry !!!
@@ -360,7 +356,7 @@ vizup.LODChain.normalizationScale = function(geometry) {
 
     var scale = 0.5*(geometry.boundingBox.max.y - geometry.boundingBox.min.y);
 
-	return scale > 0.0001 ? scale : geometry.boundingSphere.radius;
+    return scale > 0.0001 ? scale : geometry.boundingSphere.radius;
 }
 
 vizup.LODChain.normalizationCenter = function(geometry) {
